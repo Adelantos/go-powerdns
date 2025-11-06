@@ -1,6 +1,6 @@
 services:
   powerdns:
-    image: powerdns/pdns-auth-49:4.9.1
+    image: powerdns/pdns-auth-50:latest
     environment:
       PDNS_AUTH_API_KEY: secret
     ports:

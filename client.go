@@ -3,14 +3,18 @@ package pdns
 import (
 	"context"
 	"errors"
-	"github.com/mittwald/go-powerdns/apis/cryptokeys"
 	"io"
 	"net/http"
 	"time"
 
 	"github.com/mittwald/go-powerdns/apis/cache"
+	"github.com/mittwald/go-powerdns/apis/cryptokeys"
+	"github.com/mittwald/go-powerdns/apis/metadata"
+	"github.com/mittwald/go-powerdns/apis/networks"
 	"github.com/mittwald/go-powerdns/apis/search"
 	"github.com/mittwald/go-powerdns/apis/servers"
+	"github.com/mittwald/go-powerdns/apis/tsigkey"
+	"github.com/mittwald/go-powerdns/apis/views"
 	"github.com/mittwald/go-powerdns/apis/zones"
 	"github.com/mittwald/go-powerdns/pdnshttp"
 )
@@ -23,8 +27,12 @@ type client struct {
 
 	cache      cache.Client
 	cryptokeys cryptokeys.Client
+	metadata   metadata.Client
 	search     search.Client
+	networks   networks.Client
 	servers    servers.Client
+	tsigkey    tsigkey.Client
+	views      views.Client
 	zones      zones.Client
 }
 
@@ -60,6 +68,9 @@ func New(opt ...ClientOption) (Client, error) {
 	c.search = search.New(hc)
 	c.cache = cache.New(hc)
 	c.cryptokeys = cryptokeys.New(hc)
+	c.views = views.New(hc)
+	c.networks = networks.New(hc)
+	c.tsigkey = tsigkey.New(hc)
 
 	return &c, nil
 }
@@ -133,3 +144,11 @@ func (c *client) Cache() cache.Client {
 func (c *client) Cryptokeys() cryptokeys.Client {
 	return c.cryptokeys
 }
+
+func (c *client) Metadata() metadata.Client { return c.metadata }
+
+func (c *client) Networks() networks.Client { return c.networks }
+
+func (c *client) Views() views.Client { return c.views }
+
+func (c *client) TsigKeys() tsigkey.Client { return c.tsigkey }

@@ -11,11 +11,13 @@ This package contains a Go library for accessing the [PowerDNS][powerdns] Author
 - [x] Servers
 - [x] Zones
 - [x] Cryptokeys
-- [ ] Metadata
-- [ ] TSIG Keys
+- [x] Metadata
+- [x] TSIG Keys
 - [x] Searching
 - [ ] Statistics
 - [x] Cache
+- [x] Views
+- [x] Networks
 
 ## Installation
 
