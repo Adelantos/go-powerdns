@@ -15,6 +15,8 @@ func (c *client) SetNetworkView(ctx context.Context, serverID, ip string, prefix
 		url.PathEscape(ip),
 		url.PathEscape(strconv.Itoa(prefixLen)),
 	)
-	// WithJSONRequestBody(view) will serialize to "viewname" on the wire.
-	return c.httpClient.Put(ctx, path, nil, pdnshttp.WithJSONRequestBody(view))
+	body := struct {
+		View string `json:"view"`
+	}{View: view}
+	return c.httpClient.Put(ctx, path, nil, pdnshttp.WithJSONRequestBody(body))
 }

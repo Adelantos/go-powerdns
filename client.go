@@ -68,6 +68,7 @@ func New(opt ...ClientOption) (Client, error) {
 	c.search = search.New(hc)
 	c.cache = cache.New(hc)
 	c.cryptokeys = cryptokeys.New(hc)
+	c.metadata = metadata.New(hc)
 	c.views = views.New(hc)
 	c.networks = networks.New(hc)
 	c.tsigkey = tsigkey.New(hc)

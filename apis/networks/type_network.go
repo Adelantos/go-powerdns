@@ -5,3 +5,8 @@ type Network struct {
 	PrefixLen int    `json:"prefixlen"`
 	View      string `json:"view"`
 }
+
+type NetworkView struct {
+	Network string `json:"network"`
+	View    string `json:"view"`
+}

@@ -7,3 +7,5 @@ services:
       - 8081:8081
       - 8053:53/udp
       - 8053:53/tcp
+    volumes:
+      - ./docker/pdns.conf:/etc/powerdns/pdns.conf:ro

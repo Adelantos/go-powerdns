@@ -6,11 +6,17 @@ import (
 	"net/url"
 )
 
-func (c *client) ListNetworks(ctx context.Context, serverID string) ([]Network, error) {
+func (c *client) ListNetworks(ctx context.Context, serverID string) ([]NetworkView, error) {
 	path := fmt.Sprintf("/servers/%s/networks", url.PathEscape(serverID))
-	var out []Network
-	if err := c.httpClient.Get(ctx, path, &out); err != nil {
+	var resp struct {
+		Networks []NetworkView `json:"networks"`
+	}
+	if err := c.httpClient.Get(ctx, path, &resp); err != nil {
 		return nil, err
 	}
-	return out, nil
+
+	if resp.Networks == nil {
+		return []NetworkView{}, nil
+	}
+	return resp.Networks, nil
 }

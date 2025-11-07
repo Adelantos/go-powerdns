@@ -6,11 +6,11 @@ import (
 	"net/url"
 )
 
-func (c *client) ListViews(ctx context.Context, serverID string) ([]string, error) {
+func (c *client) ListViews(ctx context.Context, serverID string) (*ViewsList, error) {
 	path := fmt.Sprintf("/servers/%s/views", url.PathEscape(serverID))
-	var out []string
+	var out ViewsList
 	if err := c.httpClient.Get(ctx, path, &out); err != nil {
 		return nil, err
 	}
-	return out, nil
+	return &out, nil
 }

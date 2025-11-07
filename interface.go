@@ -2,7 +2,12 @@ package pdns
 
 import (
 	"context"
+
 	"github.com/mittwald/go-powerdns/apis/cryptokeys"
+	"github.com/mittwald/go-powerdns/apis/metadata"
+	"github.com/mittwald/go-powerdns/apis/networks"
+	"github.com/mittwald/go-powerdns/apis/tsigkey"
+	"github.com/mittwald/go-powerdns/apis/views"
 
 	"github.com/mittwald/go-powerdns/apis/cache"
 	"github.com/mittwald/go-powerdns/apis/search"
@@ -37,4 +42,16 @@ type Client interface {
 
 	// Cryptokeys returns a specialized API for cryptokeys
 	Cryptokeys() cryptokeys.Client
+
+	// Metadata returns a specialized API for metadata
+	Metadata() metadata.Client
+
+	// Views returns a specialized API for views
+	Views() views.Client
+
+	// Networks returns a specialized API for networks
+	Networks() networks.Client
+
+	// TsigKeys returns a specialized API for TSIG keys
+	TsigKeys() tsigkey.Client
 }
