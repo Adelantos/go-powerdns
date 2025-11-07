@@ -6,7 +6,7 @@ import (
 	"net/url"
 )
 
-func (c *client) Get(ctx context.Context, serverID, tsigKeyID string) (*TSIGKey, error) {
+func (c *client) GetTSIGKey(ctx context.Context, serverID, tsigKeyID string) (*TSIGKey, error) {
 	path := fmt.Sprintf("/servers/%s/tsigkeys/%s",
 		url.PathEscape(serverID),
 		url.PathEscape(tsigKeyID),

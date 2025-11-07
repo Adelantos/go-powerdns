@@ -25,6 +25,7 @@ type Zone struct {
 	ResourceRecordSets []ResourceRecordSet `json:"rrsets,omitempty"`
 	Serial             int                 `json:"serial,omitempty"`
 	NotifiedSerial     int                 `json:"notified_serial,omitempty"`
+	EditedSerial       int                 `json:"edited_serial,omitempty"`
 	Masters            []string            `json:"masters,omitempty"`
 	DNSSec             bool                `json:"dnssec,omitempty"`
 	NSec3Param         string              `json:"nsec3param,omitempty"`
@@ -34,6 +35,7 @@ type Zone struct {
 	SOAEditAPI         ZoneSOAEditAPI      `json:"soa_edit_api,omitempty"`
 	APIRectify         bool                `json:"api_rectify,omitempty"`
 	Zone               string              `json:"zone,omitempty"`
+	Catalog            string              `json:"catalog,omitempty"`
 	Account            string              `json:"account,omitempty"`
 	Nameservers        ZoneNameservers     `json:"nameservers"`
 	TSIGMasterKeyIDs   []string            `json:"tsig_master_key_ids,omitempty"`

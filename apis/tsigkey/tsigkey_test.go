@@ -27,7 +27,7 @@ func TestClientListTSIGKeys(t *testing.T) {
 	c := pdnshttp.NewClient(srv.URL, srv.Client(), nil, io.Discard)
 	client := New(c)
 
-	keys, err := client.List(context.Background(), "localhost")
+	keys, err := client.ListTSIGKey(context.Background(), "localhost")
 	require.NoError(t, err)
 	require.True(t, called)
 	require.Len(t, keys, 1)
@@ -50,7 +50,7 @@ func TestClientGetTSIGKey(t *testing.T) {
 	c := pdnshttp.NewClient(srv.URL, srv.Client(), nil, io.Discard)
 	client := New(c)
 
-	key, err := client.Get(context.Background(), "localhost", "key-one")
+	key, err := client.GetTSIGKey(context.Background(), "localhost", "key-one")
 	require.NoError(t, err)
 	require.True(t, called)
 	require.NotNil(t, key)
@@ -76,7 +76,7 @@ func TestClientCreateTSIGKey(t *testing.T) {
 	c := pdnshttp.NewClient(srv.URL, srv.Client(), nil, io.Discard)
 	client := New(c)
 
-	created, err := client.Create(context.Background(), "localhost", TSIGKey{Name: "key-one", Algorithm: "hmac-sha256"})
+	created, err := client.CreateTSIGKey(context.Background(), "localhost", TSIGKey{Name: "key-one", Algorithm: "hmac-sha256"})
 	require.NoError(t, err)
 	require.True(t, called)
 	require.NotNil(t, created)
@@ -102,7 +102,7 @@ func TestClientUpdateTSIGKey(t *testing.T) {
 	c := pdnshttp.NewClient(srv.URL, srv.Client(), nil, io.Discard)
 	client := New(c)
 
-	updated, err := client.Update(context.Background(), "localhost", "key-one", TSIGKey{Key: "new-secret"})
+	updated, err := client.UpdateTSIGKey(context.Background(), "localhost", "key-one", TSIGKey{Key: "new-secret"})
 	require.NoError(t, err)
 	require.True(t, called)
 	require.NotNil(t, updated)
@@ -123,7 +123,7 @@ func TestClientDeleteTSIGKey(t *testing.T) {
 	c := pdnshttp.NewClient(srv.URL, srv.Client(), nil, io.Discard)
 	client := New(c)
 
-	err := client.Delete(context.Background(), "localhost", "key-one")
+	err := client.DeleteTSIGKey(context.Background(), "localhost", "key-one")
 	require.NoError(t, err)
 	require.True(t, called)
 }

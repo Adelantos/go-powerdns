@@ -6,7 +6,7 @@ import (
 	"net/url"
 )
 
-func (c *client) List(ctx context.Context, serverID string) ([]TSIGKey, error) {
+func (c *client) ListTSIGKey(ctx context.Context, serverID string) ([]TSIGKey, error) {
 	path := fmt.Sprintf("/servers/%s/tsigkeys", url.PathEscape(serverID))
 	var out []TSIGKey
 	if err := c.httpClient.Get(ctx, path, &out); err != nil {

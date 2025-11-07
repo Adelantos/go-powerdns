@@ -775,18 +775,18 @@ func TestTSIGKeyLifecycle(t *testing.T) {
 		Key:       "dGVzdGtleQ==",
 	}
 
-	created, err := c.TsigKeys().Create(ctx, "localhost", input)
+	created, err := c.TsigKeys().CreateTSIGKey(ctx, "localhost", input)
 	require.NoError(t, err, "Create TSIG key returned error")
 
 	t.Cleanup(func() {
-		_ = c.TsigKeys().Delete(context.Background(), "localhost", created.ID)
+		_ = c.TsigKeys().DeleteTSIGKey(context.Background(), "localhost", created.ID)
 	})
 
 	require.NotEmpty(t, created.ID)
 	require.Equal(t, input.Name, created.Name)
 	require.Equal(t, input.Algorithm, created.Algorithm)
 
-	listed, err := c.TsigKeys().List(ctx, "localhost")
+	listed, err := c.TsigKeys().ListTSIGKey(ctx, "localhost")
 	require.NoError(t, err, "List TSIG keys returned error")
 
 	require.Condition(t, func() bool {
@@ -798,7 +798,7 @@ func TestTSIGKeyLifecycle(t *testing.T) {
 		return false
 	}, "created key should be part of list response")
 
-	fetched, err := c.TsigKeys().Get(ctx, "localhost", created.ID)
+	fetched, err := c.TsigKeys().GetTSIGKey(ctx, "localhost", created.ID)
 	require.NoError(t, err, "Get TSIG key returned error")
 	require.Equal(t, created.ID, fetched.ID)
 	require.Equal(t, input.Key, fetched.Key)
@@ -808,14 +808,14 @@ func TestTSIGKeyLifecycle(t *testing.T) {
 		Algorithm: created.Algorithm,
 	}
 
-	updated, err := c.TsigKeys().Update(ctx, "localhost", created.ID, update)
+	updated, err := c.TsigKeys().UpdateTSIGKey(ctx, "localhost", created.ID, update)
 	require.NoError(t, err, "Update TSIG key returned error")
 	require.Equal(t, update.Name, updated.Name)
 
-	err = c.TsigKeys().Delete(ctx, "localhost", updated.ID)
+	err = c.TsigKeys().DeleteTSIGKey(ctx, "localhost", updated.ID)
 	require.NoError(t, err, "Delete TSIG key returned error")
 
-	_, err = c.TsigKeys().Get(ctx, "localhost", updated.ID)
+	_, err = c.TsigKeys().GetTSIGKey(ctx, "localhost", updated.ID)
 	require.Error(t, err, "Get after delete should return error")
 	assert.True(t, pdnshttp.IsNotFound(err))
 }
