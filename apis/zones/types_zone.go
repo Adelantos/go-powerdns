@@ -38,8 +38,8 @@ type Zone struct {
 	Catalog            string              `json:"catalog,omitempty"`
 	Account            string              `json:"account,omitempty"`
 	Nameservers        ZoneNameservers     `json:"nameservers"`
-	TSIGMasterKeyIDs   []string            `json:"tsig_master_key_ids,omitempty"`
-	TSIGSlaveKeyIDs    []string            `json:"tsig_slave_key_ids,omitempty"`
+	TSIGMasterKeyIDs   []string            `json:"master_tsig_key_ids,omitempty"`
+	TSIGSlaveKeyIDs    []string            `json:"slave_tsig_key_ids,omitempty"`
 }
 
 func (z *Zone) GetRecordSet(name, recordType string) *ResourceRecordSet {

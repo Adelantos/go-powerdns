@@ -11,6 +11,7 @@ import (
 type ZoneBasicDataUpdate struct {
 	Kind       ZoneKind       `json:"kind,omitempty"`
 	Masters    []string       `json:"masters,omitempty"`
+	Catalog    string         `json:"catalog,omitempty"`
 	Account    string         `json:"account,omitempty"`
 	SOAEdit    ZoneSOAEdit    `json:"soa_edit,omitempty"`
 	SOAEditAPI ZoneSOAEditAPI `json:"soa_edit_api,omitempty"`

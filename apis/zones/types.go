@@ -6,17 +6,17 @@ type ResourceRecordSet struct {
 	TTL        int                 `json:"ttl"`
 	ChangeType RecordSetChangeType `json:"changetype,omitempty"`
 	Records    []Record            `json:"records"`
-	Comments   []Comment           `json:"comments"`
+	Comments   []Comment           `json:"comments,omitempty"`
 }
 
 type Record struct {
-	Content  string `json:"content"`
-	Disabled bool   `json:"disabled"`
-	SetPTR   bool   `json:"set-ptr,omitempty"`
+	Content    string `json:"content"`
+	Disabled   bool   `json:"disabled,omitempty"`
+	ModifiedAt int    `json:"modified_at,omitempty"`
 }
 
 type Comment struct {
-	Content    string `json:"content"`
-	Account    string `json:"account"`
-	ModifiedAt int    `json:"modified_at"`
+	Content    string `json:"content,omitempty"`
+	Account    string `json:"account,omitempty"`
+	ModifiedAt int    `json:"modified_at,omitempty"`
 }

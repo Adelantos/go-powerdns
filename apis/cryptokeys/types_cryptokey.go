@@ -10,6 +10,7 @@ type Cryptokey struct {
 	Published  bool     `json:"published,omitempty"`
 	DNSKey     string   `json:"dnskey,omitempty"`
 	DS         []string `json:"ds,omitempty"`
+	CDS        []string `json:"cds,omitempty"`
 	PrivateKey string   `json:"privatekey,omitempty"`
 	Algorithm  string   `json:"algorithm,omitempty"`
 	Bits       int      `json:"bits,omitempty"`
